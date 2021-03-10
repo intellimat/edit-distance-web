@@ -1,0 +1,58 @@
+h2 {
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+}
+
+#reset-button {
+    display: none;
+    margin-left: auto;
+}
+
+body {
+    text-align: center;
+}
+
+#reset-button {
+    margin-right: 15px;
+    
+}
+
+th, td {
+    padding: 0 8px 0 8px;
+    /* border-radius: 100%;
+     border: 1px solid grey;*/
+    font-size: 20px;
+
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#compute-button {
+    margin-right: 15px;
+}
+
+.vertical-index, .horizontal-index {
+    font-weight: 400;
+    font-size: 15px;
+    color: grey;
+}
+
+.vertical-index {
+    padding-top: 0.15rem;
+}
+
+#result {
+    margin-top: 1.6rem;
+}
+
+.btn-primary {
+    background-color: #004a99;
+    border-color: #004a99;
+}
+
+#table-container {
+    margin-top: 2rem;
+}
