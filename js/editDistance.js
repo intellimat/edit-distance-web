@@ -1,9 +1,10 @@
 function colorCell(row, col, color) {
     // pick ri-cj element from the table and change its value acording to the matrix
     let cell = document.getElementById(`r${row}-c${col}`);
-    if (cell != null)
-        cell.style.backgroundColor = color;
-    else
+    if (cell != null){
+        cssString = `background-color: ${color}; border-radius: 100%; font-weight: 600; color: white;`
+        cell.style.cssText += ';'+ cssString;
+    } else
         console.log(`cell[${i}][${j}] is equal to `, cell);
 }
 
@@ -101,7 +102,45 @@ function handleComputing() {
     editDistance = distanceMatrix[lastRow][lastCol];
 
     showResult(editDistance);
-    colorCell(lastRow,lastCol,'#80ffbf')
+    
+    colorBackTrack(D, lastRow, lastCol);
+}
+
+function colorBackTrack(D, r, c) {
+    color = ( r === D.length-1 && c === D[0].length - 1) ? '#cc2900' : '#002233'; 
+    
+    colorCell(r, c, color); // #80ffbf
+
+    topForbidden = false;
+    leftForbidden = false;
+
+    if ( r === 0 ) 
+        topForbidden = true;
+    if ( c === 0 )
+        leftForbidden = true;
+
+    if (topForbidden && leftForbidden)
+        return ;
+
+    if (topForbidden)
+        colorBackTrack(D, r, c-1);
+
+    else if (leftForbidden)
+        colorBackTrack(D, r-1, c);
+
+    else {
+        let top = D[r-1][c];    // Watch out for 'top' reserved word!
+        let left = D[r][c-1];
+        let diagonal = D[r-1][c-1];
+        let min = getMin(top, left, diagonal);
+
+        if (diagonal === min) 
+            colorBackTrack(D, r-1, c-1);
+        else if (left === min)
+            colorBackTrack(D, r, c-1);
+        else 
+            colorBackTrack(D, r-1, c);
+    }       
 }
 
 document.getElementById("reset-button").addEventListener("click", function(event){
